@@ -6,8 +6,7 @@ export async function GET() {
   connectDB();
   const aulas = await Aula.find();
   return NextResponse.json({
-    message: `consultando aulas `,
-    aulas: aulas,
+    aulas:aulas
   });
 }
 

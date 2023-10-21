@@ -6,8 +6,7 @@ export async function GET() {
   connectDB();
   const materias = await Materia.find();
   return NextResponse.json({
-    message: `consultando materias `,
-    materias: materias,
+    data: materias
   });
 }
 

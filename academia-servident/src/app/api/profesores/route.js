@@ -6,8 +6,7 @@ export async function GET() {
   connectDB();
   const profesores = await Profesor.find();
   return NextResponse.json({
-    message: `consultando profesores `,
-    profesores: profesores,
+    profesores: profesores
   });
 }
 

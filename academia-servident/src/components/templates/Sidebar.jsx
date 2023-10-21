@@ -4,7 +4,7 @@ import { IoCard, IoLogoBitcoin, IoLogoPaypal } from 'react-icons/io5';
 import Body1 from './Body1';
 
 
-function Sidebar({children}) {
+function Sidebar() {
   const [selectedOption, setSelectedOption] = useState('');
 
   const options = [
@@ -36,14 +36,14 @@ function Sidebar({children}) {
     <div className='    
     grid
     grid-cols-12
-    grid-rows-12
+    grid-rows-6
     gab-[24px] 
     col-start-1 
     col-end-3 
      w-full 
      h-full'>
 
-      <div className='col-start-1 col-end-3  items-center justify-center w-full'>
+      <div className=' pl-3 col-start-1 col-end-3 row-start-2 items-center justify-center w-full'>
       {options.map((item, index) => (
         <div
           key={index}
@@ -68,7 +68,7 @@ function Sidebar({children}) {
       ))}
         </div>
 
-      <div className='col-start-3 col-end-13 w-full h-full'>
+      <div className='col-start-3 col-end-13 row-span-full w-full h-full'>
       <Body1 selectedOption={selectedOption}/>
       <div/>
 
