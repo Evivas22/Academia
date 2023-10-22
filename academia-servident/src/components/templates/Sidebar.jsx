@@ -68,7 +68,7 @@ function Sidebar() {
       ))}
         </div>
 
-      <div className='col-start-3 col-end-13 row-span-full w-full h-full'>
+      <div className='col-start-3 col-end-13 row-span-full'>
       <Body1 selectedOption={selectedOption}/>
       <div/>
 
