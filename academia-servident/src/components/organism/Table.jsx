@@ -3,7 +3,7 @@ import { useState } from "react";
 import Modal from "react-modal";
 import ButtonMini from "../molecules/ButtonMini";
 
-function Table({ data, excludedKeys }) {
+function Table({ data, excludedKeys}) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { IoCard, IoLogoBitcoin, IoLogoPaypal } from 'react-icons/io5';
 import Body1 from './Body1';
+import ModalCreate from '../organism/ModalCreate';
 
 
 function Sidebar() {
@@ -69,7 +70,9 @@ function Sidebar() {
         </div>
 
       <div className='col-start-3 col-end-13 row-span-full'>
+   
       <Body1 selectedOption={selectedOption}/>
+  
       <div/>
 
     
