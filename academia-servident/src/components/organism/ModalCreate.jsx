@@ -6,11 +6,10 @@ import ButtonPrimary from "../molecules/ButtonPrimary";
 
 
 
-const ModalCreate = ({closeModal,filteredData }) => {
+const ModalCreate = ({closeModal,filteredData,selectedOption }) => {
 
   const [formData, setFormData] = useState({
-    nombre: "",
-    especialidad: ""
+
   });
 
   const [formFields, setFormFields] = useState({});
@@ -20,18 +19,38 @@ const ModalCreate = ({closeModal,filteredData }) => {
 
   const handleInputChange = (e, key) => {
     const { name, value } = e.target;
-    setFormFields({
-      ...formFields,
+    setFormData({
+      ...formData,
       [key]: value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para enviar o procesar los datos del formulario.
-    // Accede a los valores en formData, como formData.nombre, formData.apellido, etc.
-    console.log("Formulario enviado:", formData);
-    // Cierra el modal después de enviar el formulario
+    const options = {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify(formData),
+    };
+    fetch(`http://localhost:3000/api/${selectedOption}`, options)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('La solicitud no se completó con éxito');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log('Solicitud exitosa:', data);
+      setFormData({})
+      closeModal();
+    })
+    .catch((error) => {
+      console.error('Error al enviar la solicitud:', error);
+    });
+
+
   };
 
   return (
@@ -70,15 +89,14 @@ const ModalCreate = ({closeModal,filteredData }) => {
             type="text"
             id={key}
             name={key}
-            value={formFields[key] || ''}
+            value={formData[key] || ''}
             onChange={(e) => handleInputChange(e, key)}
           />
         </div>
       ))}
     </form>
-          </div>
-
-          <div className="flex p-2 gap-2 row-start-7">
+      </div>
+          <div className="flex p-2 gap-2 ">
             <ButtonPrimary
             onClick={handleSubmit}
             content={"Crear"} 
@@ -90,6 +108,7 @@ const ModalCreate = ({closeModal,filteredData }) => {
             onClick={closeModal}
             />
           </div>
+
         </div>
 
      

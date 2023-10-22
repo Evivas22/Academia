@@ -84,6 +84,7 @@ function Body1({ selectedOption }) {
       filteredData={filteredData}
       closeModal={closeModal}
       contentLabel="Crear"
+      selectedOption={selectedOption}
       
       />
         
