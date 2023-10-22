@@ -1,6 +1,15 @@
-function ButtonPrimary({customStyle}) {
+function ButtonPrimary({onClick, content, customStyle}) {
     return (
-      <button className={`rounded-full w-full h-[45px] p-2 bg-color-backgroud text-sm text-color-neutral font-normal shadow-sm shadow-color-primary hover:-translate-y-1 ${customStyle}`}>Añadir Nuevo</button>
+      <button 
+      onClick={onClick }
+      className={`rounded-lg w-full h-[45px] p-2 
+     
+      text-base 
+      
+    text-color-neutral 
+       font-medium 
+       shadow-sm  
+       ${customStyle}`}>{content}</button>
     )
   }
   export default ButtonPrimary

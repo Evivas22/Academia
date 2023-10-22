@@ -17,7 +17,7 @@ module.exports = {
       "color-info":"#429FBA",
       "color-success":"#61AB61",
       "color-warning":"#F89D1D",
-      "color-error":"#D8232A)",
+      "color-error":"#D8232A",
     },
     extend: {
       backgroundImage: {
