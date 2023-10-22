@@ -1,7 +1,7 @@
 import * as BiIcons from 'react-icons/bi';
 
-function ButtonSmall({onClick, icon}) {
-  const Icon = BiIcons[onClick, icon];
+function ButtonMini({onClick, icon}) {
+  const Icono = BiIcons[icon];
   return (
  <button onClick={onClick} className='
   fill-color-title
@@ -16,8 +16,8 @@ text-color-neutral
   cursor-pointer 
   rounded-md
 '>
-{<Icon/>}
+{<Icono/>}
  </button>
   )
 }
-export default ButtonSmall
+export default ButtonMini

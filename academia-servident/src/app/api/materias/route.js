@@ -5,9 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   connectDB();
   const materias = await Materia.find();
-  return NextResponse.json({
-    data: materias
-  });
+  return NextResponse.json(materias);
 }
 
 export async function POST(request) {

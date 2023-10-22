@@ -7,9 +7,7 @@ function View() {
   return (
     <div className="h-full w-full">
       <Backgroud>
-       <Sidebar/>
-        
-             
+       <Sidebar/>     
       </Backgroud>
     </div>
   );

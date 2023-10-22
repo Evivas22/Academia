@@ -5,9 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   connectDB();
   const profesores = await Profesor.find();
-  return NextResponse.json({
-    profesores: profesores
-  });
+  return NextResponse.json(profesores);
 }
 
 export async function POST(request) {

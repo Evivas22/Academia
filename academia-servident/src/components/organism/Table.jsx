@@ -1,29 +1,45 @@
-import React from "react";
 
-function Table({ data }) {
-  if (!data || data.length === 0) {
-    return <p>No hay datos disponibles.</p>;
-  }
+function Table({ data, excludedKeys }) {
+  
+  const columnHeaders = data[0]
+    ? Object.keys(data[0]).filter((key) => !excludedKeys.includes(key))
+    : [];
 
-  return (
+  // function rederizarRow(item) {
+  //   const { __v, _id, ...extras } = item;
+  //   let infoReturn = [];
+  //   setColum(Object.keys(extras))
+  //   for (const key in extras) {
+  //     const element = extras[key];
+  //     infoReturn.push(<td>{element}</td>);
+    
+  //   }
+  
+  //   return infoReturn;
+  // }
+  console.log(columnHeaders)
+  return data && data.length > 0 ? (
     <table>
       <thead>
         <tr>
-          <th>Columna 1</th>
-          <th>Columna 2</th>
-          {/* Agrega más encabezados de columnas según tus datos */}
+           {columnHeaders.map((header, index) => (
+            <th key={index}>{header}</th>
+          ))} 
         </tr>
       </thead>
+
       <tbody>
-        {data.map((item, index) => (
-          <tr key={index}>
-            <td>{item.valor1}</td> {/* Reemplaza "valor1" con el nombre real de la propiedad */}
-            <td>{item.valor2}</td> {/* Reemplaza "valor2" con el nombre real de la propiedad */}
-            {/* Agrega más celdas según tus datos */}
+        {data.map((row, rowIndex) => (
+          <tr key={rowIndex}>
+            {columnHeaders.map((header, index) => (
+              <td key={index}>{row[header]}</td>
+            ))}
           </tr>
         ))}
       </tbody>
     </table>
+  ) : (
+    <h1>no hay datos</h1>
   );
 }
 

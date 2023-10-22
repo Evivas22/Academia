@@ -5,9 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   connectDB();
   const aulas = await Aula.find();
-  return NextResponse.json({
-    aulas:aulas
-  });
+  return NextResponse.json(aulas);
 }
 
 export async function POST(request) {
