@@ -1,8 +1,9 @@
 "use client"
 import { useState } from 'react';
-import { IoCard, IoLogoBitcoin, IoLogoPaypal } from 'react-icons/io5';
+import { IoLogoBitcoin, IoLogoPaypal,} from 'react-icons/io5';
 import Body1 from './Body1';
 import ModalCreate from '../organism/ModalCreate';
+import { BiBookBookmark, BiBookmark, BiUserCircle } from 'react-icons/bi';
 
 
 function Sidebar() {
@@ -12,19 +13,19 @@ function Sidebar() {
     {
       option:'profesores',
       icon: (
-        <IoCard className="text-color-primary w-full h-full flex" />
+        <BiUserCircle className="text-color-primary w-full h-full flex" />
       )
     },
     {
       option: 'materias',
       icon: (
-        <IoLogoBitcoin className="text-color-primary w-full h-full flex" />
+        <BiBookBookmark className="text-color-primary w-full h-full flex" />
       )
     },
     {
       option: 'aulas',
       icon: (
-        <IoLogoPaypal className="text-color-primary w-full h-full flex" />
+        <BiBookmark className="text-color-primary w-full h-full flex" />
       )
     },
   ];
@@ -48,9 +49,7 @@ function Sidebar() {
       {options.map((item, index) => (
         <div
           key={index}
-          className={`${
-            selectedOption === item.option ?  'text-color-neutral appearance-none border-l-4 pl-3 rounded-md border-l-color-primary ' : ''
-          }`}
+
         >
           <label
             className="flex gap-2 mb-4 cursor-pointer items-center"
@@ -61,8 +60,12 @@ function Sidebar() {
             <span className="appearance-none w-[30px] h-[30px]">
               {item.icon}
             </span>
-            <span className="appearance-none text-lg text-color-neutral-700 font-normal capitalize w-[30px] h-[30px]">
-              {item.option}
+            <span 
+              className={`${
+                selectedOption === item.option ?  'text-color-primary  capitalize border-l-4 pl-3 rounded-md border-l-color-primary ' : 'appearance-none text-base  text-color-neutral-700 capitalize w-[30px] h-[30px]'
+              }`}>
+        
+            {item.option}
             </span>
           </label>
         </div>

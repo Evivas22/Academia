@@ -28,32 +28,38 @@ function Table({ data, excludedKeys}) {
     : [];
 
   return data && data.length > 0 ? (
-    <div className="h-full w-full p-4 gap-4 border grid grid-cols-10 grid-rows-6">
-      <div className="border flex flex-col items-center justify-center  row-start-1 col-start-1 col-span-full">
-        <div className="flex w-full items-center justify-center border border-color-warning">
-          <div className="w-[250px] px-4">Indice</div>
+    <div className="h-full w-full p-8 gap-4  grid grid-cols-10 grid-rows-6">
+      <div className=" capitalize text-color-trasparente text-base font-semibold flex flex-col items-center justify-center  row-start-1 col-start-1 col-span-full">
+        <div className="flex w-full  ">
+
+          <div className=" rounded-sm border-l w-[250px] px-4">Nº</div>
+
           {columnHeaders.map((header, index) => (
-            <div className="border w-full text-center" key={index}>
+            <div className=" border-l rounded-sm w-full pl-3" key={index}>
               {header}
             </div>
           ))}
+
           <div className="w-[300px] px-4"></div>
         </div>
       </div>
 
-      <div className="border w-full flex flex-col items-center justify-start row-start-2 row-span-full col-start-1 col-span-full">
+      <div className=" w-full flex flex-col items-center justify-start row-start-2 row-span-full col-start-1 col-span-full overflow-auto">
         {data.map((row, rowIndex) => (
           <div
-            className="flex w-full items-center justify-around border border-color-warning"
+            className=" text-color-neutral-700 capitalize font-light flex w-full items-center justify-around border-b py-4 "
             key={rowIndex}
           >
-            <div className="w-[250px] px-4">{rowIndex + 1}</div>
+            <div className=" border-l w-[250px] pl-4 ">{rowIndex + 1}</div>
+
             {columnHeaders.map((header, index) => (
-              <div className="border w-full" key={index}>
+              <div className="  w-full pl-4" key={index}>
                 {row[header]}
               </div>
             ))}
+
             <div className="flex w-[300px] px-4">
+
               <ButtonMini onClick={openModal} icon={"BiEdit"} />
               <ButtonMini icon={"BiTrash"} />
             </div>
