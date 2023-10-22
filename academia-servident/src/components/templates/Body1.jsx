@@ -58,12 +58,8 @@ function Body1({ selectedOption }) {
         shadow
         shadow-color-trasparente
         "
-        > 
-        <div className="flex items-center justify-center">
-        
-        <Table data={data} excludedKeys={["_id", "__v"]}/>
-        </div>
-        
+        >         
+        <Table data={data} excludedKeys={["_id", "__v"]}/>     
         </div>
       </div>
     )
