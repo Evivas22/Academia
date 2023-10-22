@@ -1,9 +1,12 @@
 import * as BiIcons from 'react-icons/bi';
 
-function ButtonMini({onClick, icon}) {
+function ButtonMini({onClick,icon}) {
   const Icono = BiIcons[icon];
+
   return (
- <button onClick={onClick} className='
+ <button 
+ onClick={onClick}
+ className='
   fill-color-title
   w-8
   h-8
@@ -11,12 +14,12 @@ function ButtonMini({onClick, icon}) {
   justify-center
   items-center
   text-lg
-text-color-neutral 
+text-color-neutral-700
   hover:bg-color-stroke-transparent
   cursor-pointer 
   rounded-md
 '>
-{<Icono/>}
+<Icono/>
  </button>
   )
 }
