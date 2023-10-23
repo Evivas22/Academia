@@ -1,13 +1,12 @@
 "use client";
-import React, { Children, useState } from "react";
-import Input from "@/components/molecules/Input";
+import React, { useState } from "react";
 import TextH1 from "../atoms/TextH1";
 import ButtonPrimary from "../molecules/ButtonPrimary";
 
 
 
-const ModalCreate = ({closeModal,filteredData,selectedOption }) => {
 
+  const ModalCreate = ({closeModal,filteredData,selectedOption }) => {
   const [formData, setFormData] = useState({
 
   });

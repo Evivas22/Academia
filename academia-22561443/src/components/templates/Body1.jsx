@@ -27,7 +27,6 @@ const customModalStyle = {
 
 
 function Body1({ selectedOption }) {
-  const [data2, setData2] = useState([]);
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); 
 
@@ -36,6 +35,7 @@ function Body1({ selectedOption }) {
   };
   const closeModal = () => {
     setIsModalOpen(false);
+    fetchData(selectedOption);
   };
 
     
@@ -43,7 +43,7 @@ function Body1({ selectedOption }) {
     try {
       const response = await fetch(`http://localhost:3000/api/${param}`); 
       const result = await response.json();
-      setData(Array.isArray(result) ? result : [result]); 
+      setData(Array.isArray(result) ? result : [result]);
     } catch (error) {
       console.error(error);
     }
@@ -83,7 +83,6 @@ function Body1({ selectedOption }) {
       <div className="grid grid-rows-6 gap-4 h-full ">
       <Modal
             isOpen={isModalOpen}
-            onRequestClose={closeModal}
             contentLabel="Ejemplo Modal"
             style={customModalStyle}
           >
@@ -95,6 +94,8 @@ function Body1({ selectedOption }) {
       />
         
        </Modal>
+
+
         <div className="
         bg-color-backgroudBody
         rounded-3xl
