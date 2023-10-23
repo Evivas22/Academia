@@ -48,9 +48,7 @@ function Table({ data, excludedKeys }) {
   };
 
   const columnHeaders = data[0] ? Object.keys(data[0]) : [];
-  // const columnHeaders = data[0]
-  //   ? Object.keys(data[0]).filter((key) => !excludedKeys.includes(key))
-  //   : [];
+
 
   const handleDelete = () => {
     console.log(currentIndex);
@@ -131,7 +129,6 @@ function Table({ data, excludedKeys }) {
         style={customModalStyle}
       >
         {currentIndex !== null && (
-          // Renderiza el modal solo si currentIndex no es nulo
           <div className="h-full w-full grid grid-rows-6">
             <div className="row-start-2 w-full ">
               <TextH1 content={"Eliminar"} />
