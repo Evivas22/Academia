@@ -12,8 +12,6 @@ const ModalCreate = ({closeModal,filteredData,selectedOption }) => {
 
   });
 
-  const [formFields, setFormFields] = useState({});
-  
   const uniqueKeys = Array.from(new Set(filteredData.flatMap(item => Object.keys(item))));
 
 

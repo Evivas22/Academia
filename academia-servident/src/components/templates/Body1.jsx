@@ -27,10 +27,8 @@ const customModalStyle = {
 
 
 function Body1({ selectedOption }) {
-
+  const [data2, setData2] = useState([]);
   const [data, setData] = useState([]);
-
-
   const [isModalOpen, setIsModalOpen] = useState(false); 
 
   const openModal = () => {
@@ -51,14 +49,23 @@ function Body1({ selectedOption }) {
     }
   };
 
+
+
   const filteredData = data.map(item => {
     const { _id, __v, ...filteredItem } = item;
     return filteredItem;
   });
 
   
+  const filteredDataId = data.map(item => {
+    const {  __v, ...filteredItem } = item;
+    return filteredItem;
+  });
 
-
+  
+// console.log(filteredData)
+//   const ids = data.map(objeto => objeto._id);
+  
 
 
 
@@ -74,21 +81,20 @@ function Body1({ selectedOption }) {
     return (
 
       <div className="grid grid-rows-6 gap-4 h-full ">
-          <Modal
-  isOpen={isModalOpen}
-  onRequestClose={closeModal}
-  contentLabel="Ejemplo Modal"
-  style={customModalStyle}
->
+      <Modal
+            isOpen={isModalOpen}
+            onRequestClose={closeModal}
+            contentLabel="Ejemplo Modal"
+            style={customModalStyle}
+          >
       <ModalCreate 
       filteredData={filteredData}
       closeModal={closeModal}
       contentLabel="Crear"
       selectedOption={selectedOption}
-      
       />
         
-  </Modal>
+       </Modal>
         <div className="
         bg-color-backgroudBody
         rounded-3xl
@@ -103,6 +109,13 @@ function Body1({ selectedOption }) {
         >
         <div className="">
         <TextH1 content={selectedOption}/>
+        {/* {data.map((item)=>(
+          <div key={item._id}>
+              <h3>{item._id}</h3>
+              <h3>{item.nombre}</h3>
+            </div>
+        ))} */}
+   
         </div>
         <div className="">
         <ButtonPrimary 
@@ -125,7 +138,7 @@ function Body1({ selectedOption }) {
         >
 
 
-        <Table data={data} excludedKeys={["_id", "__v"]}/>    
+        <Table  data={data}  excludedKeys={["_id", "__v"]}/>    
 
         </div>
 
