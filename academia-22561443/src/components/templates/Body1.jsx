@@ -8,6 +8,7 @@ import TextH1 from "../atoms/TextH1";
 import ButtonPrimary from "../molecules/ButtonPrimary";
 import ModalCreate from "../organism/ModalCreate";
 import fetchData from "../organism/fetchData";
+import SearchBar from "../molecules/SearchBar";
 
 
 
@@ -102,30 +103,40 @@ const loadAndUseData = async (param) => {
        </Modal>
 
 
-        <div className="
-        bg-color-backgroudBody
-        rounded-3xl
-        shadow
-        shadow-color-trasparente
-        flex
-        items-center
-        w-full
-        justify-between
-        px-4
-        "
+        <div
+        name="div Bodyhead"
+        className="
+            bg-color-backgroudBody
+            rounded-3xl
+            shadow
+            shadow-color-trasparente
+            flex
+            items-center
+            w-full
+            justify-between
+            px-4
+            "
         >
-        <div className="">
-        <TextH1 content={selectedOption}/>
-        </div>
-        <div className="">
-        <ButtonPrimary 
-        onClick={openModal}
-        customStyle={"w-[300px] bg-color-backgroud text-color-primary hover:bg-color-secondary hover:text-color-backgroud"} 
-        content={"Agregar nuevo"}
-        />
+            <div name="Titulo"
+            
+              className=""
+              >
+              <TextH1 content={selectedOption}/>
+            </div>
+            <div name="Barra buscadora"
+            className="flex justify-center items-center h-screen">
+                <SearchBar placeholder={`buscar ${selectedOption}`} />
+            </div>
+            <div name="Boton agregar"
+               className="">
+              <ButtonPrimary 
+              onClick={openModal}
+              customStyle={" px-4 w-auto bg-color-backgroud text-color-primary hover:bg-color-secondary hover:text-color-backgroud"} 
+              content={`Agregar a ${selectedOption}`}
+              />
+            </div>
         </div>
 
-        </div>
         <div className="
         row-start-2
         row-span-full

@@ -31,7 +31,6 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
 
   const openModal = (id) => {
     setCurrentIndex(id);
-    console.log(index)
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -39,8 +38,9 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
     setCurrentIndex(null);
   };
 
-  const openUpdateModal = (index) => {
-    setCurrentIndex(index);
+  const openUpdateModal = (id) => {
+    console.log("esto se va actualizar"+id)
+    setCurrentIndex(id);
     setIsUpdateModalOpen(true);
   };
 
@@ -75,7 +75,7 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
         .then((response) => {
           if (response.ok) {
             console.log("esto es lo q se esta elimnando")
-            loadAndUseData(option)
+            loadAndUseData(option)            
             closeModal();
           } else {
             alert("error al eliminar");
@@ -118,7 +118,7 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
 
             <div className="flex w-[300px] px-4">
               <ButtonMini
-                onClick={() => openUpdateModal(rowIndex)}
+                onClick={() => openUpdateModal(row._id)}
                 icon={"BiEdit"}
               />
               <ButtonMini
@@ -130,14 +130,16 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
         ))}
       </div>
 
-      {/* <Modal
-        isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        contentLabel="Ejemplo Modal"
+      <Modal
+        isOpen={isUpdateModalOpen}
+        onRequestClose={closeUpdateModal}
+        contentLabel="Modal Update"
         style={customModalStyle}
       >
-        <ModalUpdate closeModal={closeModal} />
-      </Modal> */}
+      <ModalUpdate closeModal={closeUpdateModal}/>
+
+
+      </Modal>
 
       <Modal
         isOpen={isModalOpen}
