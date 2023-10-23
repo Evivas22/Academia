@@ -2,11 +2,17 @@
 import React, { useState } from "react";
 import TextH1 from "../atoms/TextH1";
 import ButtonPrimary from "../molecules/ButtonPrimary";
+import sendRequestToAPI from "./SendRequestToAPI";
+const ModalCreate = ({closeModal,filteredData,selectedOption }) => {
+  
+  
+  
+  
 
-
-
-
-  const ModalCreate = ({closeModal,filteredData,selectedOption }) => {
+  
+  
+  
+  
   const [formData, setFormData] = useState({
     nombre: "",
     especialidad: "",
@@ -27,33 +33,19 @@ console.log(formData)
     });
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const options = {
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json', 
-      },
-      body: JSON.stringify(formData),
-    };
-    fetch(`http://localhost:3000/api/${selectedOption}`, options)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('La solicitud no se completó con éxito');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log('Solicitud exitosa:', data);
-      setFormData({})
-      closeModal();
-    })
-    .catch((error) => {
-      console.error('Error al enviar la solicitud:', error);
-    });
-
-
-  };
+    sendRequestToAPI(selectedOption, formData)
+      .then((data) => {
+        console.log('Solicitud exitosa:', data);
+        setFormData({});
+        closeModal();
+      })
+      .catch((error) => {
+        console.error('Error al enviar la solicitud:', error);
+      });
+  }
 
   return (
     

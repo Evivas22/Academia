@@ -7,6 +7,8 @@ import Table from "../organism/Table";
 import TextH1 from "../atoms/TextH1";
 import ButtonPrimary from "../molecules/ButtonPrimary";
 import ModalCreate from "../organism/ModalCreate";
+import fetchData from "../organism/fetchData";
+
 
 
 const customModalStyle = {
@@ -40,15 +42,7 @@ function Body1({ selectedOption }) {
   };
 
     
-  const fetchData = async (param) => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/${param}`); 
-      const result = await response.json();
-      setData(Array.isArray(result) ? result : [result]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
 
 
 
@@ -70,16 +64,25 @@ function Body1({ selectedOption }) {
 
 
 
+const loadAndUseData = async (param) => {
+  try {
+    const data = await fetchData(param);
+    console.log("Datos obtenidos:", data);
+    setData(data)
 
+    // Haz lo que desees con los datos aquí
+  } catch (error) {
+    console.error("Error al cargar los datos:", error);
+  }
+};
 
   
   useEffect(() => {
-    console.log(selectedOption)
-    fetchData(selectedOption);
-  }, [selectedOption]);
+    loadAndUseData(selectedOption)
+  }, [selectedOption,closeModal]);
 
 
-  console.log(selectedOption)
+  
     return (
 
       <div className="grid grid-rows-6 gap-4 h-full ">
