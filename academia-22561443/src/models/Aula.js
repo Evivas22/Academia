@@ -20,16 +20,16 @@ const AulaSchema = new Schema({
     required: [true, "El tema es requerido"],
     trim: true,
   },
-  profesor: {
-    type: Schema.Types.ObjectId,
-    ref: "Profesor",
-    required: [true, "El profesor es requerido"],
-  },
-  materia: {
-    type: Schema.Types.ObjectId,
-    ref: "Materia",
-    required: [true, "La materia es requerida"],
-  },
+  // profesor: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "Profesor",
+  //   required: [true, "El profesor es requerido"],
+  // },
+  // materia: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "Materia",
+  //   required: [true, "La materia es requerida"],
+  // },
 });
 
 export default models.Aula || model("Aula", AulaSchema);

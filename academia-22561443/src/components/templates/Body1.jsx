@@ -26,6 +26,7 @@ const customModalStyle = {
 };
 
 
+
 function Body1({ selectedOption }) {
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); 
@@ -78,6 +79,7 @@ function Body1({ selectedOption }) {
   }, [selectedOption]);
 
 
+  console.log(selectedOption)
     return (
 
       <div className="grid grid-rows-6 gap-4 h-full ">
