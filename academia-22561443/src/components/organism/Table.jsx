@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import ButtonMini from "../molecules/ButtonMini";
 import ModalUpdate from "./ModalUpdate";
@@ -7,6 +7,7 @@ import ModalDelete from "./ModalDelete";
 import TextH1 from "../atoms/TextH1";
 import ButtonPrimary from "../molecules/ButtonPrimary";
 import TextH2 from "../atoms/TextH2";
+import fetchData from "./fetchData";
 
 const customModalStyle = {
   overlay: {
@@ -23,13 +24,14 @@ const customModalStyle = {
   },
 };
 
-function Table({ data, excludedKeys }) {
+function Table({ data, setData,excludedKeys, selectedOption }) {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(null);
+  const [index, setCurrentIndex] = useState(null);
 
-  const openModal = (index) => {
-    setCurrentIndex(index);
+  const openModal = (id) => {
+    setCurrentIndex(id);
+    console.log(index)
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -50,16 +52,30 @@ function Table({ data, excludedKeys }) {
   const columnHeaders = data[0] ? Object.keys(data[0]) : [];
 
 
-  const handleDelete = () => {
-    console.log(currentIndex);
-    if (currentIndex !== null) {
-      const idToDelete = data[currentIndex]._id;
-      console.log(idToDelete);
-      fetch(`http://localhost:3000/api/profesores/${idToDelete}`, {
+
+  const loadAndUseData = async (param) => {
+    try {
+      const data = await fetchData(param);
+      console.log("Datos obtenidos:", data);
+      setData(data)
+  
+    
+    } catch (error) {
+      console.error("Error al cargar los datos:", error);
+    }
+  };
+
+  const handleDelete = (id, option) => {
+    
+    if (id !== null) {
+      console.log(id);
+      fetch(`http://localhost:3000/api/${option}/${id}`, {
         method: "DELETE",
       })
         .then((response) => {
           if (response.ok) {
+            console.log("esto es lo q se esta elimnando")
+            loadAndUseData(option)
             closeModal();
           } else {
             alert("error al eliminar");
@@ -69,6 +85,7 @@ function Table({ data, excludedKeys }) {
     }
   };
 
+  
   return data && data.length > 0 ? (
     <div className="h-full w-full p-8 gap-4  grid grid-cols-10 grid-rows-6">
       <div className=" capitalize text-color-trasparente text-base font-semibold flex flex-col items-center justify-center  row-start-1 col-start-1 col-span-full">
@@ -105,7 +122,7 @@ function Table({ data, excludedKeys }) {
                 icon={"BiEdit"}
               />
               <ButtonMini
-                onClick={() => openModal(rowIndex)}
+                onClick={() => openModal(row._id)}
                 icon={"BiTrash"}
               />
             </div>
@@ -113,14 +130,14 @@ function Table({ data, excludedKeys }) {
         ))}
       </div>
 
-      <Modal
+      {/* <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Ejemplo Modal"
         style={customModalStyle}
       >
         <ModalUpdate closeModal={closeModal} />
-      </Modal>
+      </Modal> */}
 
       <Modal
         isOpen={isModalOpen}
@@ -128,20 +145,20 @@ function Table({ data, excludedKeys }) {
         contentLabel="Ejemplo Modal"
         style={customModalStyle}
       >
-        {currentIndex !== null && (
+        
           <div className="h-full w-full grid grid-rows-6">
             <div className="row-start-2 w-full ">
               <TextH1 content={"Eliminar"} />
             </div>
             <div className="row-start-3  flex items-center justify-center">
               <TextH2
-                content={`¿Estas seguro que deseas eliminar a ${data[currentIndex].nombre}?`}
+                content={`¿Estas seguro que deseas eliminar a ${index} ?`}
                 customStyle={"text-color-neutral-700 text-base"}
               />
             </div>
             <div className="row-start-7 flex gap-3">
               <ButtonPrimary
-                onClick={() => handleDelete(data[currentIndex]._id)}
+                onClick={() => handleDelete(index, selectedOption)}
                 content={"Eliminar"}
                 customStyle={
                   "bg-color-error hover:bg-color-primary hover:text-color-backgroud  "
@@ -157,22 +174,21 @@ function Table({ data, excludedKeys }) {
               />
             </div>
           </div>
-        )}
-      </Modal>
-
+        </Modal>
+{/* 
   <Modal
   isOpen={isUpdateModalOpen}
   onRequestClose={closeUpdateModal}
   contentLabel="Modal de Actualización"
   style={customModalStyle}
 >
-  {currentIndex !== null && (
+  {id !== null && (
     <ModalUpdate
       closeModal={closeUpdateModal}
-      data={data[currentIndex]} 
+      data={data[id]} 
     />
   )}
-</Modal>
+</Modal> */}
 
     </div>
   ) : (

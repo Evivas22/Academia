@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import TextH1 from "../atoms/TextH1";
 import ButtonPrimary from "../molecules/ButtonPrimary";
 import sendRequestToAPI from "./SendRequestToAPI";
-const ModalCreate = ({closeModal,filteredData,selectedOption }) => {
+const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
   
   
   
@@ -23,7 +23,7 @@ const ModalCreate = ({closeModal,filteredData,selectedOption }) => {
     profesor: "",
     materia: "",
   });
-console.log(formData)
+
 
   const handleInputChange = (e, key) => {
     const { name, value } = e.target;

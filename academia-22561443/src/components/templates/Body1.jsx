@@ -1,4 +1,4 @@
-"use client"
+
 {/* {JSON.stringify(filteredData, null, 2)} */}
 
 import Modal from "react-modal"; 
@@ -38,7 +38,7 @@ function Body1({ selectedOption }) {
   };
   const closeModal = () => {
     setIsModalOpen(false);
-    fetchData(selectedOption);
+    loadAndUseData(selectedOption);
   };
 
     
@@ -70,7 +70,7 @@ const loadAndUseData = async (param) => {
     console.log("Datos obtenidos:", data);
     setData(data)
 
-    // Haz lo que desees con los datos aquí
+  
   } catch (error) {
     console.error("Error al cargar los datos:", error);
   }
@@ -79,8 +79,9 @@ const loadAndUseData = async (param) => {
   
   useEffect(() => {
     loadAndUseData(selectedOption)
-  }, [selectedOption,closeModal]);
+  }, [selectedOption]);
 
+  
 
   
     return (
@@ -115,13 +116,6 @@ const loadAndUseData = async (param) => {
         >
         <div className="">
         <TextH1 content={selectedOption}/>
-        {/* {data.map((item)=>(
-          <div key={item._id}>
-              <h3>{item._id}</h3>
-              <h3>{item.nombre}</h3>
-            </div>
-        ))} */}
-   
         </div>
         <div className="">
         <ButtonPrimary 
@@ -144,7 +138,7 @@ const loadAndUseData = async (param) => {
         >
 
 
-        <Table  data={data}  excludedKeys={["_id", "__v"]}/>    
+        <Table selectedOption={selectedOption} setData={setData}  data={data}  excludedKeys={["_id", "__v"]}/>    
 
         </div>
 
