@@ -19,7 +19,7 @@ const customModalStyle = {
   },
   content: {
 
-    backgroundColor: "white",
+    backgroundColor:"rgba(255, 255, 255, 0.2)",
     border: "1px solid #ccc",
     borderRadius: "10px",
     padding: "20px",
@@ -30,7 +30,7 @@ const customModalStyle = {
 
 
 
-function Body1({ selectedOption }) {
+function Body1({ selectedOption, theme }) {
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); 
 
@@ -98,6 +98,7 @@ const loadAndUseData = async (param) => {
       closeModal={closeModal}
       contentLabel="Crear"
       selectedOption={selectedOption}
+      theme={theme}
       />
         
        </Modal>
@@ -145,7 +146,7 @@ const loadAndUseData = async (param) => {
         </div>
 
         <div 
-        // data-theme="light"
+        
         className="
         glass
         row-start-2

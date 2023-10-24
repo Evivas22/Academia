@@ -24,13 +24,13 @@ const customModalStyle = {
   },
 };
 
-function Table({ data, setData,excludedKeys, selectedOption }) {
+function Table({ data, setData, excludedKeys, selectedOption }) {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [index, setCurrentIndex] = useState(null);
-
-  const openModal = (id) => {
-    setCurrentIndex(id);
+  const [index, setCurrentIndex] = useState([!null]);
+  console.log(index);
+  const openModal = (id, nombre) => {
+    setCurrentIndex(id, nombre);
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -39,7 +39,7 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
   };
 
   const openUpdateModal = (id) => {
-    console.log("esto se va actualizar"+id)
+    console.log("esto se va actualizar" + id);
     setCurrentIndex(id);
     setIsUpdateModalOpen(true);
   };
@@ -51,22 +51,17 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
 
   const columnHeaders = data[0] ? Object.keys(data[0]) : [];
 
-
-
   const loadAndUseData = async (param) => {
     try {
       const data = await fetchData(param);
       console.log("Datos obtenidos:", data);
-      setData(data)
-  
-    
+      setData(data);
     } catch (error) {
       console.error("Error al cargar los datos:", error);
     }
   };
 
   const handleDelete = (id, option) => {
-    
     if (id !== null) {
       console.log(id);
       fetch(`http://localhost:3000/api/${option}/${id}`, {
@@ -74,8 +69,8 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
       })
         .then((response) => {
           if (response.ok) {
-            console.log("esto es lo q se esta elimnando")
-            loadAndUseData(option)            
+            console.log("esto es lo q se esta elimnando");
+            loadAndUseData(option);
             closeModal();
           } else {
             alert("error al eliminar");
@@ -85,7 +80,6 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
     }
   };
 
-  
   return data && data.length > 0 ? (
     <div className="h-full w-full p-8 gap-4  grid grid-cols-10 grid-rows-6">
       <div className=" capitalize text-color-trasparente text-base font-semibold flex flex-col items-center justify-center  row-start-1 col-start-1 col-span-full">
@@ -122,7 +116,7 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
                 icon={"BiEdit"}
               />
               <ButtonMini
-                onClick={() => openModal(row._id)}
+                onClick={() => openModal([row._id, row.nombre])}
                 icon={"BiTrash"}
               />
             </div>
@@ -136,9 +130,7 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
         contentLabel="Modal Update"
         style={customModalStyle}
       >
-      <ModalUpdate closeModal={closeUpdateModal}/>
-
-
+        <ModalUpdate closeModal={closeUpdateModal} />
       </Modal>
 
       <Modal
@@ -147,37 +139,48 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
         contentLabel="Ejemplo Modal"
         style={customModalStyle}
       >
-        
-          <div className="h-full w-full grid grid-rows-6">
-            <div className="row-start-2 w-full ">
-              <TextH1 content={"Eliminar"} />
-            </div>
+        <div className="h-full w-full grid grid-rows-6">
+          <div className="row-start-2 w-full ">
+            <TextH1 content={"Eliminar"} />
+          </div>
+
+          {index && index[1] !== undefined ? (
             <div className="row-start-3  flex items-center justify-center">
               <TextH2
-                content={`¿Estas seguro que deseas eliminar a ${index} ?`}
+                content={`¿Estás seguro de que deseas eliminar a ${index[1]} ?`}
                 customStyle={"text-color-neutral-700 text-base"}
               />
             </div>
-            <div className="row-start-7 flex gap-3">
-              <ButtonPrimary
-                onClick={() => handleDelete(index, selectedOption)}
-                content={"Eliminar"}
-                customStyle={
-                  "bg-color-error hover:bg-color-primary hover:text-color-backgroud  "
-                }
-              />
-
-              <ButtonPrimary
-                content={"Cancelar"}
-                customStyle={
-                  "bg-color-neutral text-color-neutral-700 border borde-color- hover:bg-color-primary hover:text-color-backgroud"
-                }
-                onClick={closeModal}
+          ) : (
+            // Manejar el caso en el que `index` es `null` o la propiedad `1` no está definida
+            <div className="row-start-3  flex items-center justify-center">
+              <TextH2
+                content="No se puede acceder a la propiedad 1 de index."
+                customStyle={"text-color-neutral-700 text-base"}
               />
             </div>
+          )}
+
+          <div className="row-start-7 flex gap-3">
+            <ButtonPrimary
+              onClick={() => handleDelete(index[0], selectedOption)}
+              content={"Eliminar"}
+              customStyle={
+                "bg-color-error hover:bg-color-primary hover:text-color-backgroud  "
+              }
+            />
+
+            <ButtonPrimary
+              content={"Cancelar"}
+              customStyle={
+                "bg-color-neutral text-color-neutral-700 border borde-color- hover:bg-color-primary hover:text-color-backgroud"
+              }
+              onClick={closeModal}
+            />
           </div>
-        </Modal>
-{/* 
+        </div>
+      </Modal>
+      {/* 
   <Modal
   isOpen={isUpdateModalOpen}
   onRequestClose={closeUpdateModal}
@@ -191,7 +194,6 @@ function Table({ data, setData,excludedKeys, selectedOption }) {
     />
   )}
 </Modal> */}
-
     </div>
   ) : (
     <div className="h-full w-full flex items-center justify-center text-base text-color-neutral-700 ">

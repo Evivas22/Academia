@@ -100,7 +100,7 @@ function Sidebar() {
       </div>
 
       <div className="col-start-3  col-end-13 row-span-full">
-        <Body1 selectedOption={selectedOption} />
+        <Body1 selectedOption={selectedOption} theme={theme} />
 
         <div />
       </div>

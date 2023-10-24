@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import TextH1 from "../atoms/TextH1";
 import ButtonPrimary from "../molecules/ButtonPrimary";
 import sendRequestToAPI from "./SendRequestToAPI";
-const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
+const ModalCreate = ({filteredData,selectedOption, closeModal, theme }) => {
   
   
   
@@ -52,7 +52,7 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
  
 
 
-    <div className="h-full w-full grid grid-rows-6">
+    <div className=" h-full w-full grid grid-rows-6">
 
           <div className="row-start-1">
             <TextH1 content={`Agregar Nuevo ${selectedOption}`}/>
@@ -67,8 +67,9 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
           <label className="text-color-neutral-700 text-sm font-normal capitalize" htmlFor="nombre">
             Nombre
           </label>
+          
           <input
-            className="..."
+            className="input input-bordered w-full max-w-xs"
             type="text"
             id="nombre_profesor"
             name="nombre"
@@ -77,12 +78,12 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
           />
         </div>
 
-        <div className="px-10 flex flex-col w-full h-auto">
+        <div className="px-10 flex flex-col w-full h-auto ">
           <label className="text-color-neutral-700 text-sm font-normal capitalize" htmlFor="especialidad">
             Especialidad
           </label>
           <input
-            className="..."
+            className="input input-bordered w-full max-w-xs"
             type="text"
             id="especialidad_profesor"
             name="especialidad"
@@ -100,7 +101,7 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
                 Nombre
               </label>
               <input
-                className="..."
+                className="input input-bordered w-full max-w-xs"
                 type="text"
                 id="nombre_materia"
                 name="nombre"
@@ -113,7 +114,7 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
                 Descripción
               </label>
               <input
-                className="..."
+                className="input input-bordered w-full max-w-xs"
                 type="text"
                 id="descripcion_materia"
                 name="descripcion"
@@ -131,7 +132,7 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
                 Nombre
               </label>
               <input
-                className="..."
+                className="input input-bordered w-full max-w-xs"
                 type="text"
                 id="nombre_aulas"
                 name="nombre"
@@ -144,7 +145,7 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
                 Fecha
               </label>
               <input
-                className="..."
+                className="input input-bordered w-full max-w-xs"
                 type="date"
                 id="fecha_aulas"
                 name="fecha"
@@ -157,7 +158,7 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
                 Hora
               </label>
               <input
-                className="..."
+                className="input input-bordered w-full max-w-xs"
                 type="time"
                 id="hora_aulas"
                 name="hora"
@@ -170,7 +171,7 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
                 Tema
               </label>
               <input
-                className="..."
+                className="input input-bordered w-full max-w-xs"
                 type="text"
                 id="tema_aulas"
                 name="tema"
@@ -183,7 +184,7 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
                 Profesor
               </label>
               <input
-                className="..."
+                className="input input-bordered w-full max-w-xs"
                 type="text"
                 id="profesor_aula"
                 name="profesor"
@@ -196,7 +197,7 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
                 Materia
               </label>
               <input
-                className="..."
+                className="input input-bordered w-full max-w-xs"
                 type="text"
                 id="materia_aula"
                 name="materia"
@@ -209,15 +210,15 @@ const ModalCreate = ({filteredData,selectedOption, closeModal }) => {
      </form>
 
       </div>
-          <div className="flex p-2 gap-2 ">
+          <div className=" flex p-2 gap-2 ">
             <ButtonPrimary
             onClick={handleSubmit}
             content={"Crear"} 
-            customStyle={"bg-color-success hover:bg-color-primary hover:text-color-backgroud  "}/>
+            customStyle={"border border-success  "}/>
 
             <ButtonPrimary 
             content={"Cancelar"}
-            customStyle={"bg-color-error text-color-primary hover:bg-color-primary hover:text-color-backgroud"}
+            customStyle={" border border-error hover:bg-color-primary hover:text-color-backgroud"}
             onClick={closeModal}
             />
           </div>
