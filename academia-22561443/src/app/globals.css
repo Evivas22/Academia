@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
   :root{
       --backgroud:#4D5A9E;
       --backgroudBody:#F5F5F5;
@@ -11,4 +11,4 @@
       --backgroud:#191772;
       --backgroudBody:#3F3847;
   }
-}
+} */

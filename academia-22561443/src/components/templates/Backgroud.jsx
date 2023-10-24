@@ -11,6 +11,9 @@ function Backgroud({children}) {
     h-full
     w-full
     p-2
+    bg-inherit
+    bg-neutral
+   
     "
     > 
     {children}

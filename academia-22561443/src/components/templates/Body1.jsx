@@ -106,17 +106,19 @@ const loadAndUseData = async (param) => {
         <div
         name="div Bodyhead"
         className="
-            bg-color-backgroudBody
+            
             rounded-3xl
-            shadow
+            shadow-lg
             shadow-color-trasparente
             flex
             items-center
             w-full
             justify-between
             px-4
+            glass
             "
         >
+          
             <div name="Titulo"
             
               className=""
@@ -129,22 +131,30 @@ const loadAndUseData = async (param) => {
             </div>
             <div name="Boton agregar"
                className="">
-              <ButtonPrimary 
+                <button 
+                class="btn-square rounded-md btn-wide btn-primary"
+                onClick={openModal}
+                >
+                  Agregar {selectedOption}</button>
+              {/* <ButtonPrimary 
               onClick={openModal}
-              customStyle={" px-4 w-auto bg-color-backgroud text-color-primary hover:bg-color-secondary hover:text-color-backgroud"} 
+              customStyle={" px-4 w-auto bg-neutral text-color-primary hover:bg-color-secondary hover:text-color-backgroud"} 
               content={`Agregar a ${selectedOption}`}
-              />
+              /> */}
             </div>
         </div>
 
-        <div className="
+        <div 
+        // data-theme="light"
+        className="
+        glass
         row-start-2
         row-span-full
         bg-color-backgroudBody
         rounded-r-3xl
         rounded-l-3xl
-        shadow
-        shadow-color-trasparente
+        shadow-sx
+        shadow-neutral
         "
         >
 
