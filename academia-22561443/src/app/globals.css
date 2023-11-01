@@ -2,13 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
+@layer base {
   :root{
-      --backgroud:#4D5A9E;
-      --backgroudBody:#F5F5F5;
+      --Background-1:#ffffff;
+      --Background-2:#e0e0e0;
+      --Background-3:#bebebe;
+      --Texto-1:#252338;
+      --Texto-2:#F5F5F5
+
   }
   :root[class~="dark"]{
-      --backgroud:#191772;
-      --backgroudBody:#3F3847;
+      --Background-1:#444444;
+      --Background-2:#4b4b4b;
+      --Background-3:#131313;
+      --Texto-1:#e0e0e0;
+      --Texto-2:#2e2e2e;
+
   }
-} */
+}

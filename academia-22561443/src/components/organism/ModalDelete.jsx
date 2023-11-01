@@ -1,6 +1,4 @@
 function ModalDelete() {
-  return (
-    <div>ModalDelete</div>
-  )
+  return <div>ModalDelete</div>;
 }
-export default ModalDelete
+export default ModalDelete;

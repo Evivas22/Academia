@@ -7,7 +7,7 @@ import ModalDelete from "./ModalDelete";
 import TextH1 from "../atoms/TextH1";
 import ButtonPrimary from "../molecules/ButtonPrimary";
 import TextH2 from "../atoms/TextH2";
-import fetchData from "./fetchData";
+import getData from "../../utils/httpRequests";
 
 const customModalStyle = {
   overlay: {
@@ -28,7 +28,8 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [index, setCurrentIndex] = useState([!null]);
-  console.log(index);
+
+
   const openModal = (id, nombre) => {
     setCurrentIndex(id, nombre);
     setIsModalOpen(true);
@@ -53,7 +54,7 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
 
   const loadAndUseData = async (param) => {
     try {
-      const data = await fetchData(param);
+      const data = await getData(param);
       console.log("Datos obtenidos:", data);
       setData(data);
     } catch (error) {
@@ -80,14 +81,17 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
     }
   };
 
-  return data && data.length > 0 ? (
+  return data.length > 0 ? (
     <div className="h-full w-full p-8 gap-4  grid grid-cols-10 grid-rows-6">
       <div className=" capitalize text-color-trasparente text-base font-semibold flex flex-col items-center justify-center  row-start-1 col-start-1 col-span-full">
         <div className="flex w-full  ">
           <div className=" rounded-sm border-l w-[250px] px-4">Nº</div>
 
           {columnHeaders.map((header, index) => (
-            <div className=" border-l rounded-sm w-full pl-3" key={index}>
+            <div
+             className=" border-l rounded-sm w-full pl-3"
+             key={index}
+             >
               {excludedKeys.includes(header) ? null : header}
             </div>
           ))}

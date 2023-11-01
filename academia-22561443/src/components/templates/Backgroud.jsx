@@ -1,23 +1,20 @@
-
-function Backgroud({children}) {
+function Backgroud({ children }) {
   return (
-    <div className="
+    <div
+      className="
+    bg-Background-2
     relative
-    rounded-3xl 
-    shadow-lg 
+    rounded-3xl
+    shadow-lg
     shadow-color-trasparente
     items-center
-    bg-color-backgroud
     h-full
     w-full
     p-2
-    bg-inherit
-    bg-neutral
-   
     "
-    > 
-    {children}
+    >
+      {children}
     </div>
-  )
+  );
 }
-export default Backgroud
+export default Backgroud;
