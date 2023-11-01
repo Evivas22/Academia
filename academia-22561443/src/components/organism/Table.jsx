@@ -7,7 +7,7 @@ import ModalDelete from "./ModalDelete";
 import TextH1 from "../atoms/TextH1";
 import ButtonPrimary from "../molecules/ButtonPrimary";
 import TextH2 from "../atoms/TextH2";
-import getData from "../../utils/httpRequests";
+import { deleteDataById, getData } from "../../utils/httpRequests";
 
 const customModalStyle = {
   overlay: {
@@ -29,13 +29,14 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [index, setCurrentIndex] = useState([!null]);
 
-  const openModal = (id, nombre) => {
+  const openModalDelete = (id, nombre) => {
     setCurrentIndex(id, nombre);
     setIsModalOpen(true);
   };
-  const closeModal = () => {
+  const closeModalDelete = () => {
     setIsModalOpen(false);
     setCurrentIndex(null);
+    loadAndUseData(selectedOption);
   };
 
   const openUpdateModal = (id) => {
@@ -61,22 +62,17 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
     }
   };
 
-  const handleDelete = (id, option) => {
-    if (id !== null) {
-      console.log(id);
-      fetch(`http://localhost:3000/api/${option}/${id}`, {
-        method: "DELETE",
-      })
-        .then((response) => {
-          if (response.ok) {
-            console.log("esto es lo q se esta elimnando");
-            loadAndUseData(option);
-            closeModal();
-          } else {
-            alert("error al eliminar");
-          }
-        })
-        .catch((error) => {});
+  const handleDelete = async (id, url) => {
+    if (id !== null){
+      try {
+        const response = await deleteDataById(id, url);
+        closeModalDelete();
+        loadAndUseData(url);
+      } catch (error) {
+        console.error("Error al cargar los datos:", error);
+      }
+    }else{
+      alert("el elemento no existe")
     }
   };
 
@@ -116,7 +112,7 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
                 icon={"BiEdit"}
               />
               <ButtonMini
-                onClick={() => openModal([row._id, row.nombre])}
+                onClick={() => openModalDelete([row._id, row.nombre])}
                 icon={"BiTrash"}
               />
             </div>
@@ -135,65 +131,15 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
 
       <Modal
         isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        contentLabel="Ejemplo Modal"
+        onRequestClose={closeModalDelete}
         style={customModalStyle}
       >
-        <div className="h-full w-full grid grid-rows-6">
-          <div className="row-start-2 w-full ">
-            <TextH1 content={"Eliminar"} />
-          </div>
-
-          {index && index[1] !== undefined ? (
-            <div className="row-start-3  flex items-center justify-center">
-              <TextH2
-                content={`¿Estás seguro de que deseas eliminar a ${index[1]} ?`}
-                customStyle={"text-color-neutral-700 text-base"}
-              />
-            </div>
-          ) : (
-            // Manejar el caso en el que `index` es `null` o la propiedad `1` no está definida
-            <div className="row-start-3  flex items-center justify-center">
-              <TextH2
-                content="No se puede acceder a la propiedad 1 de index."
-                customStyle={"text-color-neutral-700 text-base"}
-              />
-            </div>
-          )}
-
-          <div className="row-start-7 flex gap-3">
-            <ButtonPrimary
-              onClick={() => handleDelete(index[0], selectedOption)}
-              content={"Eliminar"}
-              customStyle={
-                "bg-color-error hover:bg-color-primary hover:text-color-backgroud  "
-              }
-            />
-
-            <ButtonPrimary
-              content={"Cancelar"}
-              customStyle={
-                "bg-color-neutral text-color-neutral-700 border borde-color- hover:bg-color-primary hover:text-color-backgroud"
-              }
-              onClick={closeModal}
-            />
-          </div>
-        </div>
+        <ModalDelete
+        onSumit={() => handleDelete(index[0], selectedOption)}
+        onCancel={closeModalDelete}
+        index={index}
+        />
       </Modal>
-      {/*
-  <Modal
-  isOpen={isUpdateModalOpen}
-  onRequestClose={closeUpdateModal}
-  contentLabel="Modal de Actualización"
-  style={customModalStyle}
->
-  {id !== null && (
-    <ModalUpdate
-      closeModal={closeUpdateModal}
-      data={data[id]}
-    />
-  )}
-</Modal> */}
     </div>
   ) : (
     <div className="h-full w-full flex items-center justify-center text-base text-color-neutral-700 ">

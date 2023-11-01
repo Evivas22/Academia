@@ -36,7 +36,6 @@ function Body1({ selectedOption, theme }) {
   };
   const closeModal = () => {
     setIsModalOpen(false);
-    loadAndUseData(selectedOption);
   };
 
   const handleSearchChange = (e) => {
@@ -91,6 +90,7 @@ function Body1({ selectedOption, theme }) {
           contentLabel="Crear"
           selectedOption={selectedOption}
           theme={theme}
+          loadAndUseData={loadAndUseData}
         />
       </Modal>
 
@@ -129,11 +129,6 @@ function Body1({ selectedOption, theme }) {
           >
             Agregar {selectedOption}
           </button>
-          {/* <ButtonPrimary
-              onClick={openModal}
-              customStyle={" px-4 w-auto bg-neutral text-color-primary hover:bg-color-secondary hover:text-color-backgroud"} 
-              content={`Agregar a ${selectedOption}`}
-              /> */}
         </div>
       </div>
 

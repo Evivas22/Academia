@@ -2,8 +2,8 @@
 import { useState } from "react";
 import TextH1 from "../atoms/TextH1";
 import ButtonPrimary from "../molecules/ButtonPrimary";
-import { addData } from "@/utils/httpRequests";
-const ModalCreate = ({ filteredData, selectedOption, closeModal, theme }) => {
+import { addData, getData } from "@/utils/httpRequests";
+const ModalCreate = ({ filteredData, selectedOption, closeModal, loadAndUseData }) => {
   const [formData, setFormData] = useState({
     nombre: "",
     especialidad: "",
@@ -23,12 +23,15 @@ const ModalCreate = ({ filteredData, selectedOption, closeModal, theme }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+
+
+  const handleSubmit = (e, url) => {
     e.preventDefault();
     addData(selectedOption, formData)
       .then((data) => {
         console.log("Solicitud exitosa:", data);
         setFormData({});
+        loadAndUseData(url);
         closeModal();
       })
       .catch((error) => {
