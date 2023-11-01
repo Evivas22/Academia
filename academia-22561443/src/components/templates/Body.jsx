@@ -71,7 +71,6 @@ function Body1({ selectedOption, theme }) {
   }, [selectedOption]);
 
   useEffect(() => {
-    // Filtrar 'data' según el texto de búsqueda
     const filteredData = data.filter((item) =>
       item.nombre.toLowerCase().includes(searchText.toLowerCase())
     );

@@ -29,7 +29,6 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [index, setCurrentIndex] = useState([!null]);
 
-
   const openModal = (id, nombre) => {
     setCurrentIndex(id, nombre);
     setIsModalOpen(true);
@@ -88,10 +87,7 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
           <div className=" rounded-sm border-l w-[250px] px-4">Nº</div>
 
           {columnHeaders.map((header, index) => (
-            <div
-             className=" border-l rounded-sm w-full pl-3"
-             key={index}
-             >
+            <div className=" border-l rounded-sm w-full pl-3" key={index}>
               {excludedKeys.includes(header) ? null : header}
             </div>
           ))}
@@ -184,7 +180,7 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
           </div>
         </div>
       </Modal>
-      {/* 
+      {/*
   <Modal
   isOpen={isUpdateModalOpen}
   onRequestClose={closeUpdateModal}
@@ -194,7 +190,7 @@ function Table({ data, setData, excludedKeys, selectedOption }) {
   {id !== null && (
     <ModalUpdate
       closeModal={closeUpdateModal}
-      data={data[id]} 
+      data={data[id]}
     />
   )}
 </Modal> */}
